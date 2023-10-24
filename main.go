@@ -193,8 +193,6 @@ func main() {
 		color = envOr(EnvSlackColor, "good")
 	}
 
-	pulumiBotUser := "pulumi-bot"
-
 	msg := Webhook{
 		UserName:  os.Getenv(EnvSlackUserName),
 		IconURL:   os.Getenv(EnvSlackIcon),
@@ -205,9 +203,9 @@ func main() {
 			{
 				Fallback:   envOr(EnvSlackMessage, "GITHUB_ACTION="+os.Getenv("GITHUB_ACTION")+" \n GITHUB_ACTOR="+os.Getenv("GITHUB_ACTOR")+" \n GITHUB_EVENT_NAME="+os.Getenv("GITHUB_EVENT_NAME")+" \n GITHUB_REF="+os.Getenv("GITHUB_REF")+" \n GITHUB_REPOSITORY="+os.Getenv("GITHUB_REPOSITORY")+" \n GITHUB_WORKFLOW="+os.Getenv("GITHUB_WORKFLOW")),
 				Color:      color,
-				AuthorName: pulumiBotUser,
-				AuthorLink: os.Getenv("GITHUB_SERVER_URL") + "/" + pulumiBotUser,
-				AuthorIcon: os.Getenv("GITHUB_SERVER_URL") + "/" + pulumiBotUser + ".png?size=32",
+				AuthorName: envOr(EnvGithubActor, ""),
+				AuthorLink: os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv(EnvGithubActor),
+				AuthorIcon: os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv(EnvGithubActor) + ".png?size=32",
 				Footer:     envOr(EnvSlackFooter, "<https://github.com/rtCamp/github-actions-library|Powered By rtCamp's GitHub Actions Library>"),
 				Fields:     fields,
 			},
