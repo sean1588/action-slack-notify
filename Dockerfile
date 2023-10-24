@@ -28,10 +28,10 @@ RUN apk update \
 	bash \
 	jq \
 	ca-certificates \
-	python \
-	py2-pip \
+	python3 \
+	py3-pip \
 	rsync && \
-	pip install shyaml && \
+	pip3 install shyaml && \
 	rm -rf /var/cache/apk/*
 
 # Setup Vault
